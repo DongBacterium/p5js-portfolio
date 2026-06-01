@@ -108,101 +108,57 @@
   </style>
 </head>
 <body>
+<h1>Dong's Webby Nook</h1>
 
-<nav>
-  <span class="nav-logo">Portfolio</span>
-  <span class="nav-meta">p5.js · 과제 1 — 4</span>
-</nav>
-
-<section class="hero">
-  <div>
-    <p class="eyebrow">Visual Works</p>
-    <h1>나의 <em>작품</em><br>모음</h1>
-  </div>
-  <p class="hero-desc">
-    커다란 우주 속에서도 의미를 찾아가는 이야기.<br>
-    정적인 형태와 동적인 움직임으로 담아낸<br>
-    네 편의 p5.js 스케치.
-  </p>
-</section>
-
-<div class="rule"><hr></div>
-
-<div class="grid-wrap">
-  <div class="grid">
-
-    <div class="card" onclick="location.href='sample1/index.html'">
-      <div class="preview">
-        <iframe src="sample1/index.html" title="과제 1" loading="lazy"></iframe>
-        <span class="badge">열기 →</span>
-      </div>
-      <div class="foot">
-        <div class="foot-info">
-          <span class="num">No. 01</span>
-          <span class="title">과제 1</span>
-        </div>
-        <span class="tag tag-s">Static</span>
-      </div>
-    </div>
-
-    <div class="card" onclick="location.href='sample4/index.html'">
-      <div class="preview">
-        <iframe src="sample4/index.html" title="과제 4" loading="lazy"></iframe>
-        <span class="badge">열기 →</span>
-      </div>
-      <div class="foot">
-        <div class="foot-info">
-          <span class="num">No. 04</span>
-          <span class="title">과제 4</span>
-        </div>
-        <span class="tag tag-d">Dynamic</span>
-      </div>
-    </div>
-
-    <div class="card" onclick="location.href='sample2/index.html'">
-      <div class="preview">
-        <iframe src="sample2/index.html" title="과제 2" loading="lazy"></iframe>
-        <span class="badge">열기 →</span>
-      </div>
-      <div class="foot">
-        <div class="foot-info">
-          <span class="num">No. 02</span>
-          <span class="title">과제 2</span>
-        </div>
-        <span class="tag tag-s">Static</span>
-      </div>
-    </div>
-
-    <div class="card" onclick="location.href='sample3/index.html'">
-      <div class="preview">
-        <iframe src="sample3/index.html" title="과제 3" loading="lazy"></iframe>
-        <span class="badge">열기 →</span>
-      </div>
-      <div class="foot">
-        <div class="foot-info">
-          <span class="num">No. 03</span>
-          <span class="title">과제 3</span>
-        </div>
-        <span class="tag tag-d">Dynamic</span>
-      </div>
-    </div>
-
-  </div>
+<div class="subtitle">
+  p5.js 작품 포트폴리오
 </div>
 
-<footer>p5.js portfolio &nbsp;·&nbsp; github pages</footer>
+<div class="marquee">
+  ★ Welcome to my portfolio! Click any project to explore the full sketch ★
+</div>
 
-<script>
-  function scaleFrames() {
-    document.querySelectorAll('.preview').forEach(function(wrap) {
-      var w = wrap.offsetWidth;
-      var iframe = wrap.querySelector('iframe');
-      if (iframe) iframe.style.transform = 'scale(' + (w / 600) + ')';
-    });
-  }
-  scaleFrames();
-  window.addEventListener('resize', scaleFrames);
-</script>
+<div class="grid">
+
+  <a class="card" href="sample1/index.html">
+    <div class="preview">
+      <iframe src="sample1/index.html" title="과제 1"></iframe>
+    </div>
+    <div class="label">과제 1</div>
+  </a>
+
+  <a class="card" href="sample4/index.html">
+    <div class="preview">
+      <iframe src="sample4/index.html" title="과제 4"></iframe>
+    </div>
+    <div class="label">과제 4</div>
+  </a>
+
+  <a class="card" href="sample2/index.html">
+    <div class="preview">
+      <iframe src="sample2/index.html" title="과제 2"></iframe>
+    </div>
+    <div class="label">과제 2</div>
+  </a>
+
+  <a class="card" href="sample3/index.html">
+    <div class="preview">
+      <iframe src="sample3/index.html" title="과제 3"></iframe>
+    </div>
+    <div class="label">과제 3</div>
+  </a>
+
+</div>
+
+<div class="bottom">
+  <div class="counter">
+    Visitor Count : 000124
+  </div>
+
+  <div class="footer">
+    ★ p5.js Portfolio · GitHub Pages ★
+  </div>
+</div>
 
 </body>
 </html>
