@@ -3,162 +3,465 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>p5.js 작품 포트폴리오</title>
+  <title>Dong's Webby Nook</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;700&family=EB+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&family=IBM+Plex+Sans+KR:wght@400;500;600&display=swap" rel="stylesheet">
+
   <style>
-    :root {
-      --bg:     #F7F5F0;
-      --ink:    #1A1814;
-      --ink2:   #6B6760;
-      --ink3:   #B0ADA8;
-      --border: #E3E0DA;
-      --card:   #FFFFFF;
-    }
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body { background: var(--bg); color: var(--ink); font-family: 'DM Sans', sans-serif; min-height: 100vh; }
-
-    nav {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 40px; height: 54px;
-      border-bottom: 1px solid var(--border);
-      background: var(--bg); position: sticky; top: 0; z-index: 100;
-    }
-    .nav-logo { font-size: 12px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; }
-    .nav-meta  { font-size: 12px; color: var(--ink2); }
-
-    .hero {
-      max-width: 1100px; margin: 0 auto; padding: 72px 40px 52px;
-      display: flex; align-items: flex-end; justify-content: space-between;
-      gap: 24px; flex-wrap: wrap;
-    }
-    .eyebrow {
-      font-size: 11px; font-weight: 500; letter-spacing: 0.18em;
-      text-transform: uppercase; color: var(--ink2); margin-bottom: 14px;
-      opacity: 0; animation: rise 0.5s ease 0.1s forwards;
-    }
-    h1 {
-      font-family: 'Instrument Serif', serif; font-size: clamp(2.4rem, 4.8vw, 3.8rem);
-      font-weight: 400; line-height: 1.08; letter-spacing: -0.02em;
-      opacity: 0; animation: rise 0.5s ease 0.2s forwards;
-    }
-    h1 em { font-style: italic; color: var(--ink2); }
-
-    .hero-desc {
-      max-width: 340px; font-size: 13px; line-height: 1.8; color: var(--ink2);
-      text-align: right;
-      opacity: 0; animation: rise 0.5s ease 0.32s forwards;
+    :root{
+      --bg:#a86cff;
+      --bg2:#7b3fe4;
+      --monitor:#d7d7d7;
+      --bezel:#b8b8b8;
+      --screen:#26d33f;
+      --screen2:#1ca731;
+      --ink:#101010;
+      --paper:#fff6b8;
+      --paper2:#fffdf0;
+      --shadow: 0 28px 70px rgba(0,0,0,.28);
     }
 
-    .rule { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
-    .rule hr { border: none; border-top: 1px solid var(--border); }
-
-    .grid-wrap { max-width: 1100px; margin: 0 auto; padding: 36px 40px 80px; }
-    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-
-    .card {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: 12px; overflow: hidden; cursor: pointer;
-      transition: border-color .22s, box-shadow .22s, transform .22s;
-      opacity: 0; transform: translateY(16px);
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
     }
-    .card:nth-child(1) { animation: rise .5s ease .44s forwards; }
-    .card:nth-child(2) { animation: rise .5s ease .56s forwards; }
-    .card:nth-child(3) { animation: rise .5s ease .68s forwards; }
-    .card:nth-child(4) { animation: rise .5s ease .80s forwards; }
-    .card:hover { border-color: #C2BEB8; box-shadow: 0 10px 36px -10px rgba(26,24,20,.13); transform: translateY(-3px); }
 
-    .preview { aspect-ratio: 16/9; position: relative; overflow: hidden; background: #EEEBe5; }
-    .preview iframe { position: absolute; top:0; left:0; width:600px; height:338px; border:none; transform-origin:top left; pointer-events:none; }
-    .preview::after { content:''; position:absolute; inset:0; background:rgba(26,24,20,0); transition:background .22s; }
-    .card:hover .preview::after { background:rgba(26,24,20,.04); }
-
-    .badge {
-      position:absolute; top:12px; right:12px; z-index:2;
-      background:rgba(255,255,255,.92); border-radius:20px;
-      padding:5px 13px; font-size:11px; font-weight:500; letter-spacing:.04em; color:var(--ink);
-      opacity:0; transform:translateY(-5px); transition:opacity .2s, transform .2s;
+    html,body{
+      min-height:100%;
     }
-    .card:hover .badge { opacity:1; transform:translateY(0); }
 
-    .foot {
-      display:flex; align-items:center; justify-content:space-between;
-      padding:14px 18px; border-top:1px solid var(--border);
+    body{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:28px;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,.16), transparent 22%),
+        radial-gradient(circle at 80% 15%, rgba(255,255,255,.10), transparent 18%),
+        radial-gradient(circle at 70% 80%, rgba(255,255,255,.10), transparent 22%),
+        linear-gradient(135deg, var(--bg), var(--bg2));
+      color:var(--ink);
+      font-family:'IBM Plex Sans KR', sans-serif;
+      overflow-x:hidden;
     }
-    .foot-info { display:flex; flex-direction:column; gap:3px; }
-    .num { font-size:10px; font-weight:500; letter-spacing:.15em; text-transform:uppercase; color:var(--ink3); }
-    .title { font-family:'Instrument Serif',serif; font-size:15px; color:var(--ink); }
 
-    .tag { font-size:10px; font-weight:500; letter-spacing:.07em; text-transform:uppercase; padding:4px 11px; border-radius:20px; }
-    .tag-s { background:#F0EDE8; color:#6B6760; border:1px solid #D8D4CE; }
-    .tag-d { background:#1A1814; color:#F0EDE8; }
+    .monitor{
+      width:min(1180px, 100%);
+      background:linear-gradient(180deg, #e0e0e0, #cfcfcf);
+      border:1px solid rgba(255,255,255,.45);
+      border-radius:30px;
+      padding:26px 26px 20px;
+      box-shadow:var(--shadow);
+      position:relative;
+    }
 
-    footer { text-align:center; padding:22px 40px 36px; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink3); border-top:1px solid var(--border); }
+    .monitor::before{
+      content:"";
+      position:absolute;
+      inset:14px;
+      border-radius:22px;
+      pointer-events:none;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.6);
+    }
 
-    @keyframes rise { to { opacity:1; transform:translateY(0); } }
+    .screen-frame{
+      background:linear-gradient(180deg, #a7a7a7, #8f8f8f);
+      padding:16px;
+      border-radius:18px;
+      box-shadow:
+        inset 0 2px 0 rgba(255,255,255,.35),
+        inset 0 -2px 0 rgba(0,0,0,.12);
+    }
 
-    @media (max-width:660px) {
-      nav,footer { padding:0 20px; }
-      .hero,.rule,.grid-wrap { padding-left:20px; padding-right:20px; }
-      .hero { flex-direction:column; align-items:flex-start; padding-top:44px; }
-      .hero-desc { text-align:left; }
-      .grid { grid-template-columns:1fr; }
+    .screen{
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,0)),
+        repeating-linear-gradient(
+          to bottom,
+          rgba(255,255,255,.06) 0px,
+          rgba(255,255,255,.06) 2px,
+          transparent 2px,
+          transparent 4px
+        ),
+        linear-gradient(180deg, var(--screen), var(--screen2));
+      border-radius:14px;
+      padding:26px;
+      position:relative;
+      overflow:hidden;
+      border:2px solid rgba(0,0,0,.55);
+      min-height:760px;
+    }
+
+    .screen::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at center, rgba(255,255,255,.12), transparent 55%),
+        linear-gradient(90deg, rgba(255,255,255,.04), transparent 18%, transparent 82%, rgba(255,255,255,.04));
+      pointer-events:none;
+      mix-blend-mode:screen;
+    }
+
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      margin-bottom:18px;
+      color:#fff;
+      text-shadow:0 2px 0 rgba(0,0,0,.26);
+      position:relative;
+      z-index:1;
+    }
+
+    .brand{
+      font-family:'VT323', monospace;
+      font-size:clamp(2.4rem, 5vw, 4.8rem);
+      line-height:0.9;
+      letter-spacing:.02em;
+    }
+
+    .brand small{
+      display:block;
+      font-size:1.1rem;
+      letter-spacing:.12em;
+      margin-top:4px;
+      opacity:.95;
+    }
+
+    .status{
+      text-align:right;
+      font-family:'VT323', monospace;
+      font-size:1.35rem;
+      line-height:1.05;
+      color:#fefefe;
+      text-shadow:0 2px 0 rgba(0,0,0,.26);
+    }
+
+    .status .pill{
+      display:inline-block;
+      margin-top:8px;
+      background:rgba(255,255,255,.88);
+      color:#1a1a1a;
+      border:2px solid rgba(0,0,0,.68);
+      border-radius:999px;
+      padding:4px 12px 2px;
+      font-size:1.2rem;
+      box-shadow:0 2px 0 rgba(0,0,0,.22);
+    }
+
+    .intro{
+      position:relative;
+      z-index:1;
+      margin:6px 0 18px;
+      background:rgba(255,246,184,.92);
+      border:2px solid rgba(0,0,0,.62);
+      border-radius:16px;
+      padding:14px 18px;
+      box-shadow:0 3px 0 rgba(0,0,0,.18);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .intro p{
+      font-family:'VT323', monospace;
+      font-size:1.65rem;
+      line-height:1;
+    }
+
+    .intro .tiny{
+      font-family:'IBM Plex Sans KR', sans-serif;
+      font-size:.9rem;
+      font-weight:600;
+      color:#3d3d3d;
+      opacity:.9;
+    }
+
+    .grid{
+      position:relative;
+      z-index:1;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+      margin-top:10px;
+    }
+
+    .card{
+      display:block;
+      text-decoration:none;
+      color:inherit;
+      background:linear-gradient(180deg, #fffef8, #fff7dc);
+      border:3px solid rgba(0,0,0,.72);
+      border-radius:18px;
+      overflow:hidden;
+      box-shadow:0 6px 0 rgba(0,0,0,.20);
+      transform:translateY(0);
+      transition:transform .18s ease, box-shadow .18s ease, filter .18s ease;
+      position:relative;
+    }
+
+    .card:hover{
+      transform:translateY(-4px);
+      box-shadow:0 10px 0 rgba(0,0,0,.20);
+      filter:saturate(1.05);
+    }
+
+    .preview{
+      aspect-ratio:16/9;
+      position:relative;
+      overflow:hidden;
+      background:#dfffd2;
+      border-bottom:3px solid rgba(0,0,0,.72);
+    }
+
+    .preview iframe{
+      position:absolute;
+      top:0;
+      left:0;
+      width:600px;
+      height:400px;
+      border:0;
+      transform-origin:top left;
+      pointer-events:none;
+    }
+
+    .scanline{
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(to bottom, rgba(255,255,255,.08), transparent 10%, transparent 90%, rgba(0,0,0,.06)),
+        repeating-linear-gradient(
+          to bottom,
+          rgba(0,0,0,.08) 0px,
+          rgba(0,0,0,.08) 1px,
+          transparent 1px,
+          transparent 3px
+        );
+      mix-blend-mode:multiply;
+      pointer-events:none;
+      opacity:.45;
+    }
+
+    .badge{
+      position:absolute;
+      top:12px;
+      right:12px;
+      z-index:2;
+      background:#fff;
+      border:2px solid rgba(0,0,0,.72);
+      border-radius:999px;
+      padding:4px 10px 2px;
+      font-family:'VT323', monospace;
+      font-size:1.15rem;
+      box-shadow:0 2px 0 rgba(0,0,0,.18);
+    }
+
+    .meta{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:14px 16px 13px;
+    }
+
+    .meta-left{
+      display:flex;
+      flex-direction:column;
+      gap:4px;
+    }
+
+    .num{
+      font-family:'VT323', monospace;
+      font-size:1.15rem;
+      letter-spacing:.08em;
+      color:#4a4a4a;
+    }
+
+    .title{
+      font-family:'VT323', monospace;
+      font-size:2rem;
+      line-height:1;
+      color:#111;
+    }
+
+    .tag{
+      flex:0 0 auto;
+      font-family:'VT323', monospace;
+      font-size:1.15rem;
+      line-height:1;
+      border:2px solid rgba(0,0,0,.72);
+      border-radius:999px;
+      padding:5px 12px 3px;
+      background:var(--paper);
+      box-shadow:0 2px 0 rgba(0,0,0,.18);
+    }
+
+    .tag.static{
+      background:#e9ffd8;
+    }
+
+    .tag.dynamic{
+      background:#d7dcff;
+    }
+
+    .footer{
+      position:relative;
+      z-index:1;
+      margin-top:18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      font-family:'VT323', monospace;
+      font-size:1.35rem;
+      color:#fff;
+      text-shadow:0 2px 0 rgba(0,0,0,.26);
+    }
+
+    .footer .counter{
+      background:rgba(255,255,255,.9);
+      color:#171717;
+      border:2px solid rgba(0,0,0,.68);
+      border-radius:10px;
+      padding:6px 12px 4px;
+      box-shadow:0 3px 0 rgba(0,0,0,.16);
+    }
+
+    .footer .note{
+      opacity:.95;
+    }
+
+    @media (max-width: 860px){
+      .screen{ min-height:auto; }
+      .grid{ grid-template-columns:1fr; }
+      .topbar{ flex-direction:column; align-items:flex-start; }
+      .status{ text-align:left; }
+    }
+
+    @media (max-width: 560px){
+      body{ padding:14px; }
+      .monitor{ padding:14px; border-radius:22px; }
+      .screen{ padding:16px; }
+      .intro{ padding:12px 14px; }
+      .intro p{ font-size:1.35rem; }
+      .title{ font-size:1.7rem; }
     }
   </style>
 </head>
+
 <body>
-<h1>Dong's Webby Nook</h1>
+  <main class="monitor">
+    <div class="screen-frame">
+      <section class="screen">
+        <div class="topbar">
+          <div class="brand">
+            Dong's Webby Nook
+            <small>p5.js portfolio</small>
+          </div>
 
-<div class="subtitle">
-  p5.js 작품 포트폴리오
-</div>
+          <div class="status">
+            CLICK A USER NAME<br>
+            TO START
+            <div class="pill">ONLINE</div>
+          </div>
+        </div>
 
-<div class="marquee">
-  ★ Welcome to my portfolio! Click any project to explore the full sketch ★
-</div>
+        <div class="intro">
+          <p>Welcome to my little web world.</p>
+          <div class="tiny">과제 1 → 4 순서로 배치 / 정적 → 동적</div>
+        </div>
 
-<div class="grid">
+        <section class="grid" aria-label="p5.js 작품 목록">
+          <a class="card" href="sample1/index.html">
+            <div class="preview">
+              <iframe src="sample1/index.html" title="과제 1 미리보기" loading="lazy"></iframe>
+              <div class="scanline"></div>
+              <div class="badge">OPEN</div>
+            </div>
+            <div class="meta">
+              <div class="meta-left">
+                <div class="num">NO. 01</div>
+                <div class="title">과제 1</div>
+              </div>
+              <div class="tag static">STATIC</div>
+            </div>
+          </a>
 
-  <a class="card" href="sample1/index.html">
-    <div class="preview">
-      <iframe src="sample1/index.html" title="과제 1"></iframe>
+          <a class="card" href="sample4/index.html">
+            <div class="preview">
+              <iframe src="sample4/index.html" title="과제 4 미리보기" loading="lazy"></iframe>
+              <div class="scanline"></div>
+              <div class="badge">OPEN</div>
+            </div>
+            <div class="meta">
+              <div class="meta-left">
+                <div class="num">NO. 04</div>
+                <div class="title">과제 4</div>
+              </div>
+              <div class="tag dynamic">DYNAMIC</div>
+            </div>
+          </a>
+
+          <a class="card" href="sample2/index.html">
+            <div class="preview">
+              <iframe src="sample2/index.html" title="과제 2 미리보기" loading="lazy"></iframe>
+              <div class="scanline"></div>
+              <div class="badge">OPEN</div>
+            </div>
+            <div class="meta">
+              <div class="meta-left">
+                <div class="num">NO. 02</div>
+                <div class="title">과제 2</div>
+              </div>
+              <div class="tag static">STATIC</div>
+            </div>
+          </a>
+
+          <a class="card" href="sample3/index.html">
+            <div class="preview">
+              <iframe src="sample3/index.html" title="과제 3 미리보기" loading="lazy"></iframe>
+              <div class="scanline"></div>
+              <div class="badge">OPEN</div>
+            </div>
+            <div class="meta">
+              <div class="meta-left">
+                <div class="num">NO. 03</div>
+                <div class="title">과제 3</div>
+              </div>
+              <div class="tag dynamic">DYNAMIC</div>
+            </div>
+          </a>
+        </section>
+
+        <div class="footer">
+          <div class="counter">VISITOR : 000124</div>
+          <div class="note">★ retro portal · github pages ★</div>
+        </div>
+      </section>
     </div>
-    <div class="label">과제 1</div>
-  </a>
+  </main>
 
-  <a class="card" href="sample4/index.html">
-    <div class="preview">
-      <iframe src="sample4/index.html" title="과제 4"></iframe>
-    </div>
-    <div class="label">과제 4</div>
-  </a>
+  <script>
+    function scaleFrames() {
+      document.querySelectorAll('.preview').forEach(function(wrap) {
+        var iframe = wrap.querySelector('iframe');
+        if (!iframe) return;
+        var w = wrap.clientWidth;
+        iframe.style.transform = 'scale(' + (w / 600) + ')';
+      });
+    }
 
-  <a class="card" href="sample2/index.html">
-    <div class="preview">
-      <iframe src="sample2/index.html" title="과제 2"></iframe>
-    </div>
-    <div class="label">과제 2</div>
-  </a>
-
-  <a class="card" href="sample3/index.html">
-    <div class="preview">
-      <iframe src="sample3/index.html" title="과제 3"></iframe>
-    </div>
-    <div class="label">과제 3</div>
-  </a>
-
-</div>
-
-<div class="bottom">
-  <div class="counter">
-    Visitor Count : 000124
-  </div>
-
-  <div class="footer">
-    ★ p5.js Portfolio · GitHub Pages ★
-  </div>
-</div>
-
+    window.addEventListener('load', scaleFrames);
+    window.addEventListener('resize', scaleFrames);
+  </script>
 </body>
 </html>
