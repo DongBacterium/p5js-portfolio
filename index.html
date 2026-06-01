@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>p5.js 작품 포트폴리오</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:     #F7F5F0;
+      --ink:    #1A1814;
+      --ink2:   #6B6760;
+      --ink3:   #B0ADA8;
+      --border: #E3E0DA;
+      --card:   #FFFFFF;
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body { background: var(--bg); color: var(--ink); font-family: 'DM Sans', sans-serif; min-height: 100vh; }
+
+    nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 40px; height: 54px;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg); position: sticky; top: 0; z-index: 100;
+    }
+    .nav-logo { font-size: 12px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; }
+    .nav-meta  { font-size: 12px; color: var(--ink2); }
+
+    .hero {
+      max-width: 1100px; margin: 0 auto; padding: 72px 40px 52px;
+      display: flex; align-items: flex-end; justify-content: space-between;
+      gap: 24px; flex-wrap: wrap;
+    }
+    .eyebrow {
+      font-size: 11px; font-weight: 500; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--ink2); margin-bottom: 14px;
+      opacity: 0; animation: rise 0.5s ease 0.1s forwards;
+    }
+    h1 {
+      font-family: 'Instrument Serif', serif; font-size: clamp(2.4rem, 4.8vw, 3.8rem);
+      font-weight: 400; line-height: 1.08; letter-spacing: -0.02em;
+      opacity: 0; animation: rise 0.5s ease 0.2s forwards;
+    }
+    h1 em { font-style: italic; color: var(--ink2); }
+
+    .hero-desc {
+      max-width: 340px; font-size: 13px; line-height: 1.8; color: var(--ink2);
+      text-align: right;
+      opacity: 0; animation: rise 0.5s ease 0.32s forwards;
+    }
+
+    .rule { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+    .rule hr { border: none; border-top: 1px solid var(--border); }
+
+    .grid-wrap { max-width: 1100px; margin: 0 auto; padding: 36px 40px 80px; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+    .card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 12px; overflow: hidden; cursor: pointer;
+      transition: border-color .22s, box-shadow .22s, transform .22s;
+      opacity: 0; transform: translateY(16px);
+    }
+    .card:nth-child(1) { animation: rise .5s ease .44s forwards; }
+    .card:nth-child(2) { animation: rise .5s ease .56s forwards; }
+    .card:nth-child(3) { animation: rise .5s ease .68s forwards; }
+    .card:nth-child(4) { animation: rise .5s ease .80s forwards; }
+    .card:hover { border-color: #C2BEB8; box-shadow: 0 10px 36px -10px rgba(26,24,20,.13); transform: translateY(-3px); }
+
+    .preview { aspect-ratio: 16/9; position: relative; overflow: hidden; background: #EEEBe5; }
+    .preview iframe { position: absolute; top:0; left:0; width:600px; height:338px; border:none; transform-origin:top left; pointer-events:none; }
+    .preview::after { content:''; position:absolute; inset:0; background:rgba(26,24,20,0); transition:background .22s; }
+    .card:hover .preview::after { background:rgba(26,24,20,.04); }
+
+    .badge {
+      position:absolute; top:12px; right:12px; z-index:2;
+      background:rgba(255,255,255,.92); border-radius:20px;
+      padding:5px 13px; font-size:11px; font-weight:500; letter-spacing:.04em; color:var(--ink);
+      opacity:0; transform:translateY(-5px); transition:opacity .2s, transform .2s;
+    }
+    .card:hover .badge { opacity:1; transform:translateY(0); }
+
+    .foot {
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 18px; border-top:1px solid var(--border);
+    }
+    .foot-info { display:flex; flex-direction:column; gap:3px; }
+    .num { font-size:10px; font-weight:500; letter-spacing:.15em; text-transform:uppercase; color:var(--ink3); }
+    .title { font-family:'Instrument Serif',serif; font-size:15px; color:var(--ink); }
+
+    .tag { font-size:10px; font-weight:500; letter-spacing:.07em; text-transform:uppercase; padding:4px 11px; border-radius:20px; }
+    .tag-s { background:#F0EDE8; color:#6B6760; border:1px solid #D8D4CE; }
+    .tag-d { background:#1A1814; color:#F0EDE8; }
+
+    footer { text-align:center; padding:22px 40px 36px; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink3); border-top:1px solid var(--border); }
+
+    @keyframes rise { to { opacity:1; transform:translateY(0); } }
+
+    @media (max-width:660px) {
+      nav,footer { padding:0 20px; }
+      .hero,.rule,.grid-wrap { padding-left:20px; padding-right:20px; }
+      .hero { flex-direction:column; align-items:flex-start; padding-top:44px; }
+      .hero-desc { text-align:left; }
+      .grid { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">Portfolio</span>
+  <span class="nav-meta">p5.js · 과제 1 — 4</span>
+</nav>
+
+<section class="hero">
+  <div>
+    <p class="eyebrow">Visual Works</p>
+    <h1>나의 <em>작품</em><br>모음</h1>
+  </div>
+  <p class="hero-desc">
+    커다란 우주 속에서도 의미를 찾아가는 이야기.<br>
+    정적인 형태와 동적인 움직임으로 담아낸<br>
+    네 편의 p5.js 스케치.
+  </p>
+</section>
+
+<div class="rule"><hr></div>
+
+<div class="grid-wrap">
+  <div class="grid">
+
+    <div class="card" onclick="location.href='sample1/index.html'">
+      <div class="preview">
+        <iframe src="sample1/index.html" title="과제 1" loading="lazy"></iframe>
+        <span class="badge">열기 →</span>
+      </div>
+      <div class="foot">
+        <div class="foot-info">
+          <span class="num">No. 01</span>
+          <span class="title">우주의 한 장면</span>
+        </div>
+        <span class="tag tag-s">Static</span>
+      </div>
+    </div>
+
+    <div class="card" onclick="location.href='sample4/index.html'">
+      <div class="preview">
+        <iframe src="sample4/index.html" title="과제 4" loading="lazy"></iframe>
+        <span class="badge">열기 →</span>
+      </div>
+      <div class="foot">
+        <div class="foot-info">
+          <span class="num">No. 04</span>
+          <span class="title">과제 4</span>
+        </div>
+        <span class="tag tag-d">Dynamic</span>
+      </div>
+    </div>
+
+    <div class="card" onclick="location.href='sample2/index.html'">
+      <div class="preview">
+        <iframe src="sample2/index.html" title="과제 2" loading="lazy"></iframe>
+        <span class="badge">열기 →</span>
+      </div>
+      <div class="foot">
+        <div class="foot-info">
+          <span class="num">No. 02</span>
+          <span class="title">초록 들판의 캐릭터</span>
+        </div>
+        <span class="tag tag-s">Static</span>
+      </div>
+    </div>
+
+    <div class="card" onclick="location.href='sample3/index.html'">
+      <div class="preview">
+        <iframe src="sample3/index.html" title="과제 3" loading="lazy"></iframe>
+        <span class="badge">열기 →</span>
+      </div>
+      <div class="foot">
+        <div class="foot-info">
+          <span class="num">No. 03</span>
+          <span class="title">과제 3</span>
+        </div>
+        <span class="tag tag-d">Dynamic</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>p5.js portfolio &nbsp;·&nbsp; github pages</footer>
+
+<script>
+  function scaleFrames() {
+    document.querySelectorAll('.preview').forEach(function(wrap) {
+      var w = wrap.offsetWidth;
+      var iframe = wrap.querySelector('iframe');
+      if (iframe) iframe.style.transform = 'scale(' + (w / 600) + ')';
+    });
+  }
+  scaleFrames();
+  window.addEventListener('resize', scaleFrames);
+</script>
+
+</body>
+</html>
