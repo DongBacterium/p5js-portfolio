@@ -18,64 +18,52 @@ box-sizing:border-box;
 
 body{
 font-family:'VT323', monospace;
-background:linear-gradient(
+background:
+linear-gradient(
 180deg,
-#c7a7ff,
-#dcbfff
+#12071f 0%,
+#2b0d4f 40%,
+#4c1d95 100%
 );
 min-height:100vh;
 padding:40px;
 overflow-x:hidden;
 }
 
-/* 떠다니는 스티커 */
-
-.sticker{
+.star{
 position:fixed;
-font-size:40px;
+color:#ffffff;
+font-size:24px;
 pointer-events:none;
-animation:float 5s ease-in-out infinite;
+animation:twinkle 3s infinite;
+z-index:0;
 }
 
-.s1{
-top:40px;
-left:50px;
-}
-
-.s2{
-top:100px;
-right:80px;
-animation-delay:1s;
-}
-
-.s3{
-bottom:80px;
-left:80px;
-animation-delay:2s;
-}
-
-.s4{
-bottom:100px;
-right:70px;
-animation-delay:3s;
-}
-
-@keyframes float{
+@keyframes twinkle{
 
 0%,100%{
-transform:translateY(0px);
+opacity:.3;
+transform:scale(.8);
 }
 
 50%{
-transform:translateY(-15px);
+opacity:1;
+transform:scale(1.2);
 }
 
 }
 
-.wrapper{
-max-width:1100px;
-margin:auto;
-}
+.s1{top:5%;left:8%;}
+.s2{top:15%;left:80%;}
+.s3{top:30%;left:12%;}
+.s4{top:22%;left:60%;}
+.s5{top:45%;left:90%;}
+.s6{top:70%;left:15%;}
+.s7{top:80%;left:75%;}
+.s8{top:60%;left:45%;}
+.s9{top:12%;left:40%;}
+.s10{top:85%;left:55%;}
+
 
 /* 헤더 */
 
@@ -102,7 +90,7 @@ margin-top:10px;
 /* 메모장 */
 
 .note{
-background:#fff8c8;
+background:#f3e8ff;
 border:4px solid #222;
 border-radius:25px;
 padding:18px;
@@ -121,7 +109,7 @@ gap:24px;
 }
 
 .card{
-background:white;
+background:#f8f4ff;
 border:4px solid #222;
 border-radius:25px;
 overflow:hidden;
@@ -193,10 +181,16 @@ font-size:50px;
 
 <body>
 
-<div class="sticker s1">⭐</div>
-<div class="sticker s2">☁️</div>
-<div class="sticker s3">🎀</div>
-<div class="sticker s4">🐰</div>
+<div class="star s1">✦</div>
+<div class="star s2">✧</div>
+<div class="star s3">★</div>
+<div class="star s4">✦</div>
+<div class="star s5">✧</div>
+<div class="star s6">★</div>
+<div class="star s7">✦</div>
+<div class="star s8">✧</div>
+<div class="star s9">★</div>
+<div class="star s10">✦</div>
 
 <div class="wrapper">
 
@@ -216,7 +210,7 @@ font-size:50px;
 <iframe src="sample1/index.html"></iframe>
 </div>
 <div class="label">
-⭐ 과제 1
+⭐ LEVEL 01
 </div>
 </a>
 
@@ -225,7 +219,7 @@ font-size:50px;
 <iframe src="sample4/index.html"></iframe>
 </div>
 <div class="label">
-🌙 과제 4
+🌙 LEVEL 04
 </div>
 </a>
 
@@ -234,7 +228,7 @@ font-size:50px;
 <iframe src="sample2/index.html"></iframe>
 </div>
 <div class="label">
-🍓 과제 2
+🌿 LEVEL 02
 </div>
 </a>
 
@@ -243,7 +237,7 @@ font-size:50px;
 <iframe src="sample3/index.html"></iframe>
 </div>
 <div class="label">
-🐰 과제 3
+✨ LEVEL 03
 </div>
 </a>
 
